@@ -1,19 +1,19 @@
 import React from 'react';
 
 const PasswordStrength = ({ password }) => {
-    const checkPasswordStrength = (password) => {
-        const hasUppercase = /[A-Z]/.test(password);
-        const hasLowercase = /[a-z]/.test(password);
-        const hasNumber = /\d/.test(password);
-        const hasSymbol = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
-        const isStrong = password.length >= 8 && hasUppercase && hasLowercase && hasNumber && hasSymbol;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSymbol = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
+    const isStrong = password.length >= 8 && hasUppercase && hasLowercase && hasNumber && hasSymbol;
 
-        if (isStrong) return 'Strong';
-        if (password.length >= 6) return 'Moderate';
-        return 'Weak';
-    };
+    const strength = isStrong ? 'Strong' : password.length >= 6 ? 'Moderate' : 'Weak';
 
-    const passwordStrength = checkPasswordStrength(password);
+    const missingCriteria = [];
+    if (!hasUppercase) missingCriteria.push('an Uppercase character');
+    if (!hasLowercase) missingCriteria.push('a Lowercase character');
+    if (!hasNumber) missingCriteria.push('a Number');
+    if (!hasSymbol) missingCriteria.push('a Symbol');
 
     const getBgColor = (passwordStrength) => {
         switch (passwordStrength) {
@@ -28,9 +28,18 @@ const PasswordStrength = ({ password }) => {
         }
     };
 
+    const getMissingCriteriaStyle = missingCriteria.length > 0 ? 'text-red-600 font-medium' : '';
+
     return (
-        <div className={`w-full flex justify-center items-center text-white text-lg font-semibold rounded-lg p-2 mt-4 ${getBgColor(passwordStrength)}`}>
-            {passwordStrength}
+        <div className="mt-2">
+            <div className={`text-lg font-semibold mb-2 ${getBgColor(strength)} text-white rounded-md p-2 text-center`}>
+                {strength}
+            </div>
+            {missingCriteria.length > 0 && (
+                <div className={`text-sm ${getMissingCriteriaStyle}`}>
+                    Missing: {missingCriteria.join(', ')}
+                </div>
+            )}
         </div>
     );
 };
