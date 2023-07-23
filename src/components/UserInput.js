@@ -25,7 +25,7 @@ const UserInput = () => {
                     onChange={handleInputChange}
                 />
                 <button
-                    className="ml-2 px-4 py-2 rounded-md bg-red-400 text-white font-semibold hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 w-32 h-12"
+                    className="ml-2 px-4 py-2 rounded-md bg-red-500 text-white font-semibold hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 w-32 h-12"
                     onClick={toggleInputType}
                 >
                     {inputType === 'text' ? 'Hide' : 'Show'}

@@ -35,7 +35,7 @@ const PasswordStrength = ({ password }) => {
             <div className={`text-lg font-semibold mb-2 ${getBgColor(strength)} text-white rounded-md p-2 text-center`}>
                 {strength}
             </div>
-            {missingCriteria.length > 0 && (
+            {password.length > 0 && missingCriteria.length > 0 && (
                 <div className={`text-sm ${getMissingCriteriaStyle}`}>
                     Missing: {missingCriteria.join(', ')}
                 </div>
